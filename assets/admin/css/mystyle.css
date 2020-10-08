@@ -1,0 +1,139 @@
+.leftaln{
+  margin-left: 10px;padding: 10px;width: 90px;
+}
+.rightaln{
+  margin-left: 10px;padding: 10px;
+}
+.t{
+  width: 90px;
+}
+
+.dis-div-img{
+    position: relative;
+    width: 66px;
+    height: 74px;
+    margin-left: 20px;
+    display: block;
+    top: 38px;
+}
+.preloader{
+    position: absolute;
+    margin-left: 22px;
+    display: block;
+}
+
+#file {
+    display: none;
+}
+
+.file__drop {
+    display: block;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    border: 3px dashed #969696;
+}
+
+.file__drop span.text {
+    color: #969696;
+    color: #969696;
+    display: block;
+    padding: 10px 0 0 0;
+}
+
+.file__drop span.choose-image {
+    display: table;
+    color: #696969;
+    background: #eee;
+    margin: auto;
+    padding: 0px 20px;
+    margin-top: 42px;
+}
+ .form-fields {
+    display: table;
+    width: 100%;
+}
+
+ .form-fields .form-fields-inner {
+    display: table;
+    width: 90%;
+    width: calc(100% - 90px);
+    margin: auto;
+}
+
+ .form-fields button.button.upload {
+    display: block;
+    border: none;
+    padding: 15px 80px;
+    font-size: 16px;
+    text-transform: uppercase;
+    background: #2492c3;
+    width: 100%;
+    margin: 10px auto;
+    color: #fff;
+}
+
+button.button.section{
+ display: block;
+    border: none;
+    padding: 15px 0px;
+    font-size: 14px;
+    text-transform: uppercase;
+    background: #48dd69;
+    width: 90%;
+    margin: 10px auto;
+    color: #fff;
+}
+
+button.button.section:hover {
+    background: #3adda8;
+}
+
+ .form-fields button.button.upload:hover{
+    background: #12a3c3;
+}
+
+ .form-fields button.button.remove {
+    display: block;
+    border: none;
+    padding: 15px 80px;
+    font-size: 16px;
+    text-transform: uppercase;
+    background: #f2bb23;
+    width: 100%;
+    margin: 10px auto;
+    color: #fff;
+}
+ .form-fields button.button.remove:hover{
+    background: #f2d92c;
+}
+
+ .form-fields span.note {
+
+    width: 100%;
+    display: block;
+    margin: auto;
+    color: #969696;
+    font-weight: 500;
+}
+
+ .form-field-container {
+    background: #fff;
+    padding: 0 0 30px 0;
+}
+.es-input{
+     height: 46px;
+    padding: 10px 16px 10px 0px;
+    font-size: 18px !important;
+    line-height: 1.3333333;
+    width: 100%;    
+    width: 60%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+
+}
+.es-list li{
+    padding: 12px 0px 12px 10px !important;
+
+}
