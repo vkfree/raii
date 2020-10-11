@@ -121,6 +121,59 @@ $config['ci_bootstrap'] = array(
 			'icon'		=> 'dashboard',
 		),
 
+		'user' => array(
+			'name'		=> 'User',
+			'url'		=> 'user',
+			'icon'		=> 'group',
+			'children'  => array(
+				'List'		=> 'user',
+				'Create'	=> 'user/create'
+			)
+		),
+
+		'survey' => array(
+			'name'		=> 'Survey',
+			'url'		=> 'survey',
+			'icon'		=> 'poll',
+			'children'  => array(
+				'List'			=> 'survey',
+				'Create'		=> 'survey/create',
+			)
+		),
+
+		'payments' => array(
+			'name'		=> 'Payments',
+			'url'		=> 'payments',
+			'icon'		=> 'payment',
+			'children'  => array(
+				'List'			=> 'payments/list',
+				'Create'		=> 'payments/create',
+			)
+		),
+
+		'rewards' => array(
+        	'name'		=> 'Rewards',
+        	'url'		=> 'rewards',
+        	'icon'		=> 'gamepad',
+        	'children'  => array(
+        		'List'			=> 'rewards/list',
+        	    'Create'		=> 'rewards/create',
+        	)
+        ),
+        
+    	
+    	'setting' => array(
+        	'name'		=> 'Setting',
+        	'url'		=> 'setting',
+        	'icon'		=> 'brightness_7',
+        	'children'  => array(
+        		'Refreal'			=> 'rewards/list',
+        	    'Notification'		=> 'rewards/create',
+        	    'Profile'		=> 'rewards/create',
+        	    'History'		=> 'rewards/create',
+        	)
+        ),
+
 		'banner' => array(
         	'name'		=> 'Banner',
         	'url'		=> 'banner',
@@ -144,15 +197,11 @@ $config['ci_bootstrap'] = array(
         	)
         ),
 		
-    	/*'user' => array(
-			'name'		=> 'Users List',
-			'url'		=> 'user',
-			'icon'		=> 'group',
-			'children'  => array(
-				'User List'			=> 'user',
-				'Driver List'			=> 'driver',
-			)
-		),
+		
+        
+
+
+		/*
 
 		'activate_driver' => array(
 			'name'		=> 'Activate Driver',
@@ -196,7 +245,7 @@ $config['ci_bootstrap'] = array(
 			'url'		=> 'driver/list1',
 			'icon'		=> 'group',
 		),
-		*/
+		
 		
 		// 'statement' => array(
 		// 	'name'		=> 'Statement',
@@ -307,7 +356,8 @@ $config['ci_bootstrap'] = array(
 		'category/create'			=> array('webmaster'),
 		'product'				=> array('webmaster', 'vendor'),
 		'product/create'			=> array('webmaster', 'vendor'),
-
+		'dashboard/create'			=> array('webmaster', 'vendor'),
+		'dashboard/list'			=> array('webmaster', 'vendor'),
 		'vender_request/list1'			=> array('vendor'),
 
 		'request'				=> array('webmaster'),
