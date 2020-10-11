@@ -13,7 +13,7 @@ class Survey extends Admin_Controller {
 
 	public function index()
 		{
-			$udata = $this->custom_model->my_where('survey','*',array(),array(),"","","","","",array(),"",false);
+			$udata = $this->custom_model->my_where('survey','*',array('deleted_at'=>NULL),array(),"","","","","",array(),"",false);
 			$this->mViewData['udata'] = $udata;
 			$this->render('survey/list');
 			
@@ -102,7 +102,7 @@ class Survey extends Admin_Controller {
 			$insert_id = $this->custom_model->my_insert($insert_data,'survey_questions');
 			if($insert_id)
 				{
-					$survey_data = $this->custom_model->my_where('survey_questions','*',array('survey_id'=>@$post_data['survey_id']));
+					$survey_data = $this->custom_model->my_where('survey_questions','*',array('survey_id'=>@$post_data['survey_id'],'deleted_at'=>NULL));
 					if(!empty($survey_data))
 						{
 							$count_records = count($survey_data);
@@ -127,12 +127,13 @@ class Survey extends Admin_Controller {
 	
 	public function edit($survey_id)
 		{
-			$survey_data = $this->custom_model->my_where('survey','*',array('survey_id'=>@$survey_id,'deleted_at'=>NULL));
+			$survey_id_d = en_de_crypt($survey_id,'d');
+			$survey_data = $this->custom_model->my_where('survey','*',array('id'=>@$survey_id_d,'deleted_at'=>NULL));
 			if(!empty($survey_data))
 				{
 					foreach ($survey_data as $key => $value) 
 						{
-							$survey_questions = $this->custom_model->my_where('survey_questions','*',array('survey_id'=>@$survey_id,'deleted_at'=>NULL));
+							$survey_questions = $this->custom_model->my_where('survey_questions','*',array('survey_id'=>@$value['survey_id'],'deleted_at'=>NULL));
 							if(!empty($survey_questions))
 								{
 									foreach ($survey_questions as $skey => $svalue) 
@@ -146,6 +147,15 @@ class Survey extends Admin_Controller {
 			$this->render('survey/detail');		
 		}
 	
+	public function deleteSurvey($survey_id)
+		{
+			$survey_id_d = en_de_crypt($survey_id,'d');
+			$updates = array('deleted_at'=>date('Y-m-d H:i:s'));
+			$this->custom_model->my_update($updates,array('id'=>@$survey_id_d),'survey');
+			$survey_data = $this->custom_model->my_where('survey','*',array('id'=>@$survey_id_d));		
+			$this->custom_model->my_update($updates,array('survey_id'=>@$survey_data[0]['survey_id']),'survey_questions');
+			redirect('admin/survey');
+		}	
 
 	public function deleteQuestion($question_id)
 		{

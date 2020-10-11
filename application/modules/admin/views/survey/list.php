@@ -41,8 +41,8 @@ foreach($udata as $row)
 <td><?php echo $row['type'];?></td>
 <td><?php echo $row['created_at'];?></td>
 <td class="actions">
-   <a style="width: 30px;" href="<?php echo base_url();?>admin/survey/edit/<?php echo $row['survey_id']?>" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button"> <i class="glyphicon glyphicon-pencil"></i></a>
-   <a style="width: 30px;" href="<?php echo base_url();?>admin/survey/delete/<?php echo $row['survey_id']?>" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button"> <i class="glyphicon glyphicon-trash"></i></a>
+   <a style="width: 30px;" href="<?php echo base_url();?>admin/survey/edit/<?php echo en_de_crypt($row['id'],'e');?>" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button"> <i class="glyphicon glyphicon-pencil"></i></a>
+   <a style="width: 30px;" onclick="return confirm('Are you Sure');" href="<?php echo base_url();?>admin/survey/deleteSurvey/<?php echo en_de_crypt($row['id'],'e');?>" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button"> <i class="glyphicon glyphicon-trash"></i></a>
 </td>
 </tr>
 <?php }?>
