@@ -47,6 +47,48 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                </div>    
+                <div class="col-md-4">
+                    <div id="chartContainer1" style="height: 300px; width: 100%;"></div>
+                </div>    
+            </div>
+
+            <div class="row" style="margin: 100px 10px;">
+                <h2 style="text-align: center;padding: 30px 0px;color: #5c56a0;">Recent Transaction</h2>
+                <table class="table table-sm table-dark" style="border: 1px solid #c9d45c !important;">
+                  <thead>
+                    <tr style="color: #303135;background-color: #c9d45c;">
+                      <th scope="col">#</th>
+                      <th scope="col">Customer Name</th>
+                      <th scope="col">Contact Details</th>
+                      <th scope="col">Service Purchase</th>
+                      <th scope="col">Service Amount</th>
+                      <th scope="col">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php for($i=1;$i<20;$i++){?>
+                    <tr style="color: #49b4b9;font-weight: bold;">
+                      <th scope="row"><?php echo $i;?></th>
+                      <td>Mark Zugerberg</td>
+                      <td>mark@demo.com</td>
+                      <td>Purchase Coupouns</td>
+                      <td>200 $ </td>
+                      <td>21-10-2020</td>
+                    </tr>
+                <?php }?>
+                    <tr>
+                      <th scope="row"><?php echo @$i++;?></th>
+                      <td colspan="2">Larry the Bird</td>
+                      <td>@twitter</td>
+                      <td>Mark</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>    
           
         </div>
     </div>
@@ -192,13 +234,13 @@ span.capital{
 }
 
  .table.table.table-striped::-webkit-scrollbar {
-        width: 0px;
-        height: 12px;
-    }
-    .table.table.table-striped::-webkit-scrollbar-thumb {
-        background: rgb(42, 39, 75);
-    }
-</style>
+    width: 0px;
+    height: 12px;
+}
+.table.table.table-striped::-webkit-scrollbar-thumb {
+    background: rgb(42, 39, 75);
+}
+
 </style>
 
 <script type="text/javascript">
@@ -218,7 +260,7 @@ span.capital{
 </script>
 <script>
     window.onload = function() {
-    var chart = new CanvasJS.Chart("chartContainer", {
+    var chart = new CanvasJS.Chart("chartContainer1", {
         theme: "light1", // "light1", "light2", "dark1", "dark2"
         exportEnabled: false,
         animationEnabled: true,
@@ -234,13 +276,49 @@ span.capital{
             indexLabelFontSize: 14,
             indexLabel: "{label} - {y}%",
             dataPoints: [
-                { y: <?php echo $u_count; ?>, label: " Driver ", exploded: true }, 
-                { y: <?php echo $d_count; ?>, label: " User " }
+                { y: 30, label: " Jan - Mar ", exploded: true }, 
+                { y: 20, label: " Apr - Jun " },
+                { y: 35, label: " Jul - Sep " },
+                { y: 15, label: " Oct - Dec " }
             ]
         }]
     });
     chart.render();
-    }
+
+    var dataPoints = [];
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light2",
+        title: {
+            text: "Daily Sales Data"
+        },
+        axisY: {
+            title: "Units",
+            titleFontSize: 24,
+            includeZero: true
+        },
+        data: [{
+            type: "column",
+            yValueFormatString: "#,### Units",
+            dataPoints: dataPoints
+        }]
+    });
+
+    function addData(data) {
+        for (var i = 0; i < data.length; i++) {
+            dataPoints.push({
+                x: new Date(data[i].date),
+                y: data[i].units
+            });
+        }
+        chart.render();
+
+}
+
+$.getJSON("https://canvasjs.com/data/gallery/javascript/daily-sales-data.json", addData);
+
+}
 </script>
 
 <!-- <script src="../../canvasjs.min.js"></script> -->
