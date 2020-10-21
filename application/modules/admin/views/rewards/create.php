@@ -104,7 +104,7 @@ $color2: #3197EE;
               <div class="row">  
   			        <div class="col-sm-6">
                    <div class="form-group row">
-                      <label for="product_name" class="col-sm-2 col-form-label">Coupoun Value<i class="text-danger">*</i></label>
+                      <label for="product_name" class="col-sm-2 col-form-label">Price<i class="text-danger">*</i></label>
                       <div class="col-sm-10">
                           <textarea class="form-control space" tabindex="1" name="coupoun" type="text" id="coupoun" placeholder="Please enter coupoun value"  required="" autocomplete="off"><?php echo @$store_data[0]['price'];?></textarea>
                       </div>
@@ -123,6 +123,23 @@ $color2: #3197EE;
 	              </div> 
 	            </div>       	
   			    </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="product_name" class="col-sm-2 col-form-label">Status<i class="text-danger">*</i></label>
+                    <div class="col-sm-10">
+                       <div class="radio">
+                            <input id="radio-1" name="status" type="radio" value="active" checked="">
+                            <label for="radio-1" class="radio-label">Active</label>
+                       </div>
+                       <div class="radio">
+                          <input id="radio-2" name="status" value="in-active" type="radio">
+                          <label for="radio-2" class="radio-label">In-active</label>
+                       </div>
+                    </div>
+                </div> 
+              </div>
+             </div> 
 
       			<div class="row">
       		    <div class="col-sm-6">

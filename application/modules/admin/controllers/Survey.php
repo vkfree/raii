@@ -25,6 +25,8 @@ class Survey extends Admin_Controller {
 			$this->render('admin/survey/create');
 		}
 
+
+
 	public function store()
 		{
 			$genrated_id = "RIL_".time().rand(10000,99999);
@@ -84,6 +86,27 @@ class Survey extends Admin_Controller {
 			
 		}	
 
+	public function questions($row)
+		{
+			$html = '<tr>
+			
+						<td>'.(@$row['qc1']+1).'</td>
+	      				<td>'.@$row['question'].'</td>
+	      				<td>'.@$row['option_1'].'</td>
+	      				<td>'.@$row['option_2'].'</td>
+	      				<td>'.@$row['option_3'].'</td>
+	      				<td>'.@$row['option_4'].'</td>
+	      				<td>'.@$row['answer'].'</td>
+	      				<td>'.@$row['description'].'</td>
+	      				<td>'.@$row['time'].'</td>
+	      				<td class="actions">
+	         			<a style="width: 30px;" onclick="questionEdit('.en_de_crypt(@$row['survey_id'],'e').')" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button"> <i class="glyphicon glyphicon-pencil"></i></a>
+	         			<a style="width: 30px;" onclick="questionDelete('.en_de_crypt(@$row['survey_id'],'e').')" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button"> <i class="glyphicon glyphicon-trash"></i></a>
+	         			</td>
+         			</tr>';
+
+         	return $html;		
+		}
 
 	public function store_question()
 		{
@@ -112,6 +135,7 @@ class Survey extends Admin_Controller {
 					$return_data['status']="success";
 					$return_data['id']=$insert_id;
 					$return_data['msg']="Survey question added successfully";
+					$return_data['html']=$this->questions($post_data);
 					echo json_encode($return_data);
 					die();
 				}
@@ -133,7 +157,7 @@ class Survey extends Admin_Controller {
 				{
 					foreach ($survey_data as $key => $value) 
 						{
-							$survey_questions = $this->custom_model->my_where('survey_questions','*',array('survey_id'=>@$value['survey_id'],'deleted_at'=>NULL));
+							$survey_questions = $this->custom_model->my_where('survey_questions','*',array('survey_id'=>@$value['survey_id'],'deleted_at'=>NULL),'','id','desc');
 							if(!empty($survey_questions))
 								{
 									foreach ($survey_questions as $skey => $svalue) 
@@ -146,6 +170,7 @@ class Survey extends Admin_Controller {
 			$this->mViewData['survey_data'] = $survey_data;
 			$this->render('survey/detail');		
 		}
+
 	
 	public function deleteSurvey($survey_id)
 		{

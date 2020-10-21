@@ -5,7 +5,7 @@
 }
 .panel-body {
     padding: 40px;
-    border: 1px solid #ededed;
+    border: 1px solid #afacac;
 }
 .radio, .checkbox {
     position: relative;
@@ -90,6 +90,9 @@ $color2: #3197EE;
 	padding: 10px 20px;
 	float: right;
 }
+.form-group .form-control {
+  border: 1px solid #afa5a5 !important;
+}    
 </style>
 
 <div class="row">
@@ -156,11 +159,12 @@ $color2: #3197EE;
       <div class="panel lobidrag" id="create-question-div"  style="display: none;">
          <form action="#" data-ha-url="<?php echo base_url('en/admin/survey/store_question');?>" class="form-vertical" method="post" id="create-survey-question" name="create-survey-question" enctype="multipart/form-data"  accept-charset="utf-8">
             <input type="hidden" id="survey_id" name="survey_id" value="<?php echo @$survey_data[0]['survey_id'];?>">
+            <input type="hidden" name="qc1" id="qc1" value="<?php echo count(@$survey_data[0]['survey']);?>">
             <div class="panel-body">
               <div class="row">
                 <div class="col-sm-12">
                    <div class="form-group row">
-                      <label for="product_name" class="col-sm-1 col-form-label">Question<i class="text-danger">*</i></label>
+                      <label for="product_name" class="col-sm-1 col-form-label"><span id="qc"> <?php echo count($survey_data[0]['survey'])+1;?> </span> Question<i class="text-danger">*</i></label>
                       <div class="col-sm-11">
                           <textarea class="form-control space" tabindex="1" placeholder="Please enter Question " name="question" type="text" id="question" rows="4" required=""></textarea>
                       </div>
@@ -265,48 +269,52 @@ $color2: #3197EE;
      </div>
   </div>
 
-<div id="listing">
-<input type="button" class="btn btn-large btn-warning addquestion" value="Add more question"  onclick="SurveyAdd()">
-<table class="table table-bordered table-striped table-hover dataTable js-exportable">
-<thead>
-<tr>
-<th>Question</th>
-<th>Option 1</th>
-<th>Option 2</th>
-<th>Option 3</th>
-<th>Option 4</th>
-<th>Answer</th>
-<th>Description</th>
-<th>Time</th>
+  <div id="listing" style="display: none;">
+      <input type="button" class="btn btn-large btn-warning addquestion" value="Add more question"  onclick="SurveyAdd()">
+      <input type="hidden" id="qcountss"  value="<?php echo count($survey_data[0]['survey']);?>">
+      <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+      <thead>
+      <tr>
+      <th>#</th> 
+      <th>Question</th>
+      <th>Option 1</th>
+      <th>Option 2</th>
+      <th>Option 3</th>
+      <th>Option 4</th>
+      <th>Answer</th>
+      <th>Description</th>
+      <th>Time</th>
 
-<th style="width: 90px;">Actions</th>
-</tr>
-</thead>
+      <th style="width: 90px;">Actions</th>
+      </tr>
+      </thead>
 
-<tbody>
-<?php
-if(!empty($survey_data[0]['survey']))
-foreach($survey_data[0]['survey'] as $row)
-{
-?>
-<tr>
-<td><?php echo @$row['question'];?></td>
-<td><?php echo @$row['a'];?></td>
-<td><?php echo @$row['b'];?></td>
-<td><?php echo @$row['c'];?></td>
-<td><?php echo @$row['d'];?></td>
-<td><?php echo @$row['answer'];?></td>
-<td><?php echo @$row['description'];?></td>
-<td><?php echo @$row['time'];?></td>
-<td class="actions">
-   <a style="width: 30px;" onclick="questionEdit('<?php echo en_de_crypt(@$row['id'],'e');?>')" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button"> <i class="glyphicon glyphicon-pencil"></i></a>
-   <a style="width: 30px;" onclick="questionDelete('<?php echo en_de_crypt(@$row['id'],'e');?>')"class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button"> <i class="glyphicon glyphicon-trash"></i></a>
-</td>
-</tr>
-<?php }?>
-</tbody>
-</table>
-</div>
+      <tbody id="qrow">
+      <?php
+      if(!empty($survey_data[0]['survey']))
+      foreach($survey_data[0]['survey'] as $key => $row)
+      {
+
+      ?>
+      <tr>
+      <td><?php echo @$key+1;?></td>  
+      <td><?php echo @$row['question'];?></td>
+      <td><?php echo @$row['a'];?></td>
+      <td><?php echo @$row['b'];?></td>
+      <td><?php echo @$row['c'];?></td>
+      <td><?php echo @$row['d'];?></td>
+      <td><?php echo @$row['answer'];?></td>
+      <td><?php echo @$row['description'];?></td>
+      <td><?php echo @$row['time'];?></td>
+      <td class="actions">
+         <a style="width: 30px;" onclick="questionEdit('<?php echo en_de_crypt(@$row['id'],'e');?>')" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button"> <i class="glyphicon glyphicon-pencil"></i></a>
+         <a style="width: 30px;" onclick="questionDelete('<?php echo en_de_crypt(@$row['id'],'e');?>')"class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button"> <i class="glyphicon glyphicon-trash"></i></a>
+      </td>
+      </tr>
+      <?php }?>
+      </tbody>
+      </table>
+  </div>
 
 
 
@@ -323,6 +331,8 @@ foreach($survey_data[0]['survey'] as $row)
 
   function SurveyAdd()
   	{
+      var qcountss = parseInt($('#qcountss').val())+1;
+      $('#qc').html(qcountss);
   		$('#create-question-div').show();
   		$('#create-survey-div').hide();
   		$('#listing').hide();
@@ -412,6 +422,8 @@ foreach($survey_data[0]['survey'] as $row)
                   localStorage.setItem('survey_id',data['survey_id']);
                   $('#survey_id').val(data['survey_id']);
                   swal(data['msg'],"Add Survey Questions Now","success");
+                  $('#create-survey-div').hide();
+                  $('#listing').show();
               }
               else
               {
@@ -471,19 +483,27 @@ foreach($survey_data[0]['survey'] as $row)
               hideLoader();
               var data = JSON.parse(returndata);
               if(data['status'] == 'success'){
+                  var qcountss = parseInt($('#qcountss').val());
+                  qcountss=qcountss+1;
+                  $('#qc').html(qcountss);
+                  $('#qcountss').val(qcountss);
+                  $('#qc1').val(qcountss);
                   localStorage.setItem('insert_id',data['id']);
+                  $('#create-question-div').hide();
+                  $('#listing').show();
                   $("#create-survey-question").find('input:text, input:password, input:file, textarea').val('');
                   $('#survey_id').val(localStorage.getItem('survey_id'));
-			  	  setTimeout(function() {
-				        swal({
-				            title: "Survey question added successfully",
-				            text: "",
-				            type: "success"
-				        }, function() {
-				        	location.reload();
-			         	});
-			      }, 1000);
-			  }
+                  setTimeout(function() {
+      				        swal({
+      				            title: "Survey question added successfully",
+      				            text: "",
+      				            type: "success"
+      				        }, function() {
+      				        	//location.reload();
+      			         	});
+      			      }, 1000);
+                  $('#qrow').prepend(data['html']);
+      			  }
               else
               {
                 swal("Survey question add failed","Pleas try again","error");

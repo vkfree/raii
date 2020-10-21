@@ -5,7 +5,7 @@
 }
 .panel-body {
     padding: 40px;
-    border: 1px solid #ededed;
+    border: 1px solid #afacac;
 }
 .radio, .checkbox {
     position: relative;
@@ -84,6 +84,14 @@ $color2: #3197EE;
     }
   }
 }
+.back-to-survey{
+  padding: 12px 10px;
+  margin: 0px 40px;
+  background-color: black !important;
+}
+.form-group .form-control {
+  border: 1px solid #afa5a5 !important;
+}    
 </style>
 <div class="row">
    <div class="col-sm-12">
@@ -149,11 +157,12 @@ $color2: #3197EE;
       <div class="panel lobidrag" id="create-question-div"  style="display: none;">
          <form action="#" data-ha-url="<?php echo base_url('en/admin/survey/store_question');?>" class="form-vertical" method="post" id="create-survey-question" name="create-survey-question" enctype="multipart/form-data"  accept-charset="utf-8">
             <input type="hidden" id="survey_id" name="survey_id" value="">
+            <input type="hidden" id="qcounts" value="1">
             <div class="panel-body">
               <div class="row">
                 <div class="col-sm-12">
                    <div class="form-group row">
-                      <label for="product_name" class="col-sm-1 col-form-label">Question<i class="text-danger">*</i></label>
+                      <label for="product_name" class="col-sm-1 col-form-label"> <span id="qcount">1</span>) Question <i class="text-danger">*</i></label>
                       <div class="col-sm-11">
                           <textarea class="form-control space" tabindex="1" placeholder="Please enter Question " name="question" type="text" id="question" rows="4" required=""></textarea>
                       </div>
@@ -246,7 +255,7 @@ $color2: #3197EE;
                        <div id="ajaxMessageSurveyQuestion"></div>
                        <input type="submit" value="Save Question" name="add-product-another" class="btn btn-large btn-warning" id="add-product-another"
                       tabindex="15" autocomplete="off" style="padding: 12px 50px;margin: 0px 0px;float: left;">
-                      <input type="button" class="btn btn-large btn-warning" value="Back to survey list" onclick="SurveyList()">
+                      <input type="button" class="btn btn-large btn-warning back-to-survey" value="Back to survey list" onclick="SurveyList()">
                     </div>  
                   </div>
                 </div>     
@@ -362,6 +371,7 @@ $color2: #3197EE;
     var formData = new FormData(this);
     e.preventDefault();
     showLoader();
+    var qcounts = parseInt($('#qcounts').val());
     $.ajax({
               url: $(this).attr('data-ha-url'),
               type: 'POST',
@@ -386,6 +396,9 @@ $color2: #3197EE;
               hideLoader();
               var data = JSON.parse(returndata);
               if(data['status'] == 'success'){
+                  qcounts = qcounts +1;
+                  $('#qcounts').val(qcounts);
+                  $('#qcount').html(qcounts);
                   localStorage.setItem('insert_id',data['id']);
                   swal("Survey question added successfully","Add More Questions","success");
                   $("#create-survey-question").find('input:text, input:password, input:file, textarea').val('');
