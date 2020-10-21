@@ -174,28 +174,28 @@ $config['ci_bootstrap'] = array(
         	)
         ),
 
-		'banner' => array(
-        	'name'		=> 'Banner',
-        	'url'		=> 'banner',
-        	'icon'		=> 'add_a_photo',
-        	'children'  => array(
-        		'List'			=> 'banner',
-        	    'Create'		=> 'banner/create',
-        	)
-        ),
+		// 'banner' => array(
+  //       	'name'		=> 'Banner',
+  //       	'url'		=> 'banner',
+  //       	'icon'		=> 'add_a_photo',
+  //       	'children'  => array(
+  //       		'List'			=> 'banner',
+  //       	    'Create'		=> 'banner/create',
+  //       	)
+  //       ),
         
-		'pages' => array(
-        	'name'		=> 'Pages',
-        	'url'		=> 'pages',
-        	'icon'		=> 'pages',
-        	'children'  => array(
-        		'List'			=> 'pages',
-        	   	'Create'		=> 'pages/create',
-        	   	'FAQ'			=> 'pages/test',
-        	   	// 'FAQ'			=> 'pages/test',
-        	   /*	'About'			=> 'pages/about_service',*/
-        	)
-        ),
+		// 'pages' => array(
+  //       	'name'		=> 'Pages',
+  //       	'url'		=> 'pages',
+  //       	'icon'		=> 'pages',
+  //       	'children'  => array(
+  //       		'List'			=> 'pages',
+  //       	   	'Create'		=> 'pages/create',
+  //       	   	'FAQ'			=> 'pages/test',
+  //       	   	// 'FAQ'			=> 'pages/test',
+  //       	   /*	'About'			=> 'pages/about_service',*/
+  //       	)
+  //       ),
 		
 		
         
