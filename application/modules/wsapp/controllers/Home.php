@@ -16,57 +16,54 @@ class Home extends Admin_Controller {
 	 */
 
 	 public function home()
-   	{
-   		$json = file_get_contents('php://input');
+   		{
+	   		$json = file_get_contents('php://input');
+			$language 		= @$jsonobj->language;
+			$language 		= empty($language)? 'en':$language;
+			$ws 			= @$jsonobj->ws;
+			$ws 			= empty($ws)? 'home':$ws;
+			// $user_id 		= 627;
+			//$user_id = $this->validate_token($language,$ws);
+			//$json 		= '{"user_id":"3"}';
+			$jsonobj 	= json_decode($json);
+	   	 	$response = array();
+	   	 	$questions = array();
+	   	 	$options = array();
 
-		$language 		= @$jsonobj->language;
-		$language 		= empty($language)? 'en':$language;
-		$ws 			= @$jsonobj->ws;
-		$ws 			= empty($ws)? 'home':$ws;
-		// $user_id 		= 627;
-		//$user_id = $this->validate_token($language,$ws);
+	 		$response1 = $this->custom_model->get_data_array("SELECT a.*,q.* FROM `survey` AS a INNER JOIN `survey_questions` AS q ON a.survey_id = q.survey_id");
+			foreach ($response1 as $qkey => $qval)
+		 		{
+		 			$survey_id = $qval['survey_id'];
+		 			$question_id = $qval['id'];
+		 			$response[$qkey]['questions'] = $qval['question'];
+		 			$response[$qkey]['survey_id'] = $qval['survey_id'];
+		 			$response[$qkey]['survey_name'] = $qval['survey_name'];
+		 			$options = $this->custom_model->get_data_array("SELECT * FROM survey_questions WHERE `id` = '$question_id'");
+		 			foreach ($options as $ookey => $oovalue)
+			 			{ 	
+			 				$response[$qkey]['options'][0]['key'] = 'a';
+							$response[$qkey]['options'][0]['value'] = $oovalue['a'];
 
-		//$json 		= '{"user_id":"3"}';
-		$jsonobj 	= json_decode($json);
-   	 	$response = array();
-   	 	$questions = array();
-   	 	$options = array();
+							$response[$qkey]['options'][1]['key'] = 'b';
+							$response[$qkey]['options'][1]['value'] = $oovalue['b'];
 
- 		$response1 = $this->custom_model->get_data_array("SELECT a.*,q.* FROM `survey` AS a INNER JOIN `survey_questions` AS q ON a.survey_id = q.survey_id");
+							$response[$qkey]['options'][2]['key'] = 'c';
+							$response[$qkey]['options'][2]['value'] = $oovalue['c'];
 
- 		//print_r($response);
- 		//die;
- 		foreach ($response1 as $qkey => $qval)
- 		{
- 			$survey_id = $qval['survey_id'];
- 			$question_id = $qval['id'];
- 			$response[$qkey]['questions'] = $qval['question'];
- 			$response[$qkey]['survey_id'] = $qval['survey_id'];
- 			$response[$qkey]['survey_name'] = $qval['survey_name'];
- 			//$response[$survey_id]['options'] = $questions;
- 			$options = $this->custom_model->get_data_array("SELECT * FROM survey_questions WHERE `id` = '$question_id'");
- 			foreach ($options as $ookey => $oovalue)
- 			{ 		
- 				$qu_id = $oovalue['id'];
-				$response[$ookey]['options']['a'] = $oovalue['a'];
-				$response[$ookey]['options']['b'] = $oovalue['b'];
-				$response[$ookey]['options']['c'] = $oovalue['c'];
-				$response[$ookey]['options']['d'] = $oovalue['d'];
-				
- 			}
- 			
- 			
- 			
- 		}
- 		// echo "<pre>";
- 		// print_r($options);
- 		// die;
-   	 	if($response){
-   	 		echo json_encode( array("status" => true,"ws"=>$ws ,"data" => $response) );die;
-   	 	}else{
-   	 		echo json_encode( array("status" => false,"ws"=>$ws , "message" => 'Something went wrong.') );die;
-   	 	}
-   	}
+							$response[$qkey]['options'][3]['key'] = 'd';
+							$response[$qkey]['options'][3]['value'] = $oovalue['d'];
+						}
+			 	}
+
+	   	 	if($response)
+		   	 	{
+		   	 		echo json_encode( array("status" => true,"ws"=>$ws ,"data" => $response) );die;
+		   	 	}
+	   	 	else
+		   	 	{
+		   	 		echo json_encode( array("status" => false,"ws"=>$ws , "message" => 'Something went wrong.') );die;
+		   	 	}
+   		}
 
 	 
 	 
