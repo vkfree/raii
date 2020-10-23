@@ -13,68 +13,49 @@ class Dashbord extends Admin_Controller {
 
 	public function index()
 	{
+		$store_order = array();
 		
 		$form = $this->form_builder->create_form('','','id="wizard_with_validation" class="wizard clearfix"');
 
-		$driver = $this->custom_model->my_where('admin_users','*',array('type' => "driver"),array(),"","","","", array(), "",array(),false );
-		$this->mViewData['driver'] = $driver;
+		$users = $this->custom_model->my_where('users','*',array(),array(),"","","","", array(), "",array(),false );
+		$rewards = $this->custom_model->my_where('store','*',array(),array(),"","","","", array(), "",array(),false );
+		$survey = $this->custom_model->my_where('survey','*',array(),array(),"","","","", array(), "",array(),false );
+		$orders = $this->custom_model->my_where('order_table','*',array(),array(),"","","","", array(), "",array(),false );
 
-		// $latest_booking = $this->custom_model->get_data("SELECT confirm_booking.*,admin_users.first_name FROM confirm_booking INNER JOIN admin_users ON confirm_booking.user_id = admin_users.id  ORDER BY `id` DESC LIMIT 6"); 
-		// $this->mViewData['latest_booking'] = $latest_booking;
+		$this->mViewData['user_count'] 	 = count($users);	
+		$this->mViewData['reward_count'] = count($rewards);	
+		$this->mViewData['store_count']  = count($survey);	
+		$this->mViewData['orders_count'] = count($orders);	
 
-		// echo "<pre>";
-		// print_r($latest_booking); die;
-
-		$u_count = $this->custom_model->get_data("SELECT COUNT(id) as ida FROM admin_users WHERE type = 'user' ");
-	    foreach($u_count as $rowa)
-	    {
-	   		$u_count = $rowa->ida;
-	  	}
-		$this->mViewData['u_count'] = $u_count;
-
-
-		$d_count = $this->custom_model->get_data("SELECT COUNT(id) as ida FROM admin_users WHERE type = 'driver' ");
-	    foreach($d_count as $rowa)
-	    {
-	   		$d_count = $rowa->ida;
-	  	}
-		$this->mViewData['d_count'] = $d_count;
-
-
-
-
+		$store_order = $this->custom_model->my_where('store_order','*',array(),array(),"","","","", array(), "",array(),false );
+		if(!empty($store_order))
+			{
+				foreach ($store_order as $key => $value) 
+					{
+						$user = $this->custom_model->my_where('users','*',array('id'=>@$value['user_id']),array(),"","","","", array(), "",array(),false );
+						$store = $this->custom_model->my_where('store','*',array('id'=>@$value['store_id']),array(),"","","","", array(), "",array(),false );
+						$store_order[$key]['user_name'] = @$user[0]['first_name']." ".@$user[0]['last_name'];
+						$store_order[$key]['email'] 	  = @$user[0]['email'];
+						$store_order[$key]['source'] 	  = @$user[0]['source'];
+						$store_order[$key]['phone']     = @$user[0]['phone'];
+						$store_order[$key]['store_name']  = @$store[0]['name'];
+						$store_order[$key]['image']     	= @$store[0]['image'];
+						$store_order[$key]['price']     	= @$store[0]['price'];
+					}				
+			}
+		$this->mViewData['store_order'] = $store_order;	
 		$now = date('Y-m-d' ,strtotime('today'));
 		$month = date('Y-m' ,strtotime('today'));
-
-		//Today's orders
-		// $t_booking = $this->custom_model->get_data("SELECT COUNT(id) as ida FROM confirm_booking WHERE status = 'complete' ");
-	 //    foreach($t_booking as $rowa)
-	 //    {
-	 //   		$t_booking = $rowa->ida;
-	 //  	}
-		// $this->mViewData['t_booking'] = $t_booking;
-
-
-		// $pending_order = $this->custom_model->get_data("SELECT COUNT(id) as ida FROM confirm_booking WHERE status = 'pending' ");
-	 //     foreach($pending_order as $rowa)
-	 //    {
-	 //   		$pending_order = $rowa->ida;
-	 //  	}	  	
-		// $this->mViewData['pending_order'] = $pending_order;
-
-
-
-		// print_r($pending_order);die;
-
-
-	    // daily job applied for todays count
 		$date = date('Y-m-d');
-		// print_r($date); die;
-
-
-
-
 		$this->mPageTitle = 'Dashbord';
 		$this->render('admin/dashbord', 'plain');
 	}
+
+	public function get_chart_data()
+		{
+			
+		}
+
+
+
 }

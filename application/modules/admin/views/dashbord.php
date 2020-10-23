@@ -8,8 +8,8 @@
                             <i class="material-icons">shopping_cart</i>
                         </div>
                         <div class="content">
-                            <div class="text">Total </div>
-                            <div class="number">12</div>
+                            <div class="text">Total Users </div>
+                            <div class="number"><?php echo @$user_count;?></div>
                         </div>
                     </div>
                 </div>
@@ -19,8 +19,8 @@
                             <i class="material-icons">access_alarm</i>
                         </div>
                         <div class="content">
-                            <div class="text">Pending </div>
-                            <div class="number">21</div>
+                            <div class="text">Reward</div>
+                            <div class="number"><?php echo @$reward_count;?></div>
                         </div>
                     </div>
                 </div>
@@ -30,8 +30,8 @@
                             <i class="material-icons">poll</i>
                         </div>
                         <div class="content">
-                            <div class="text">Deactive User</div>
-                            <div class="number">34</div>
+                            <div class="text">Survey</div>
+                            <div class="number"><?php echo @$store_count;?></div>
                         </div>
                     </div>
                 </div>
@@ -41,8 +41,8 @@
                             <i class="material-icons">insert_invitation</i>
                         </div>
                         <div class="content">
-                            <div class="text">Unknown</div>
-                            <div class="number">21</div>
+                            <div class="text">Orders</div>
+                            <div class="number"><?php echo @$orders_count;?></div>
                         </div>
                     </div>
                 </div>
@@ -57,37 +57,39 @@
             </div>
 
             <div class="row" style="margin: 100px 10px;">
-                <h2 style="text-align: center;padding: 30px 0px;color: #5c56a0;">Recent Transaction</h2>
-                <table class="table table-sm table-dark" style="border: 1px solid #c9d45c !important;">
-                  <thead>
-                    <tr style="color: #303135;background-color: #c9d45c;">
-                      <th scope="col">#</th>
-                      <th scope="col">Customer Name</th>
-                      <th scope="col">Contact Details</th>
-                      <th scope="col">Service Purchase</th>
-                      <th scope="col">Service Amount</th>
-                      <th scope="col">Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php for($i=1;$i<20;$i++){?>
-                    <tr style="color: #49b4b9;font-weight: bold;">
-                      <th scope="row"><?php echo $i;?></th>
-                      <td>Mark Zugerberg</td>
-                      <td>mark@demo.com</td>
-                      <td>Purchase Coupouns</td>
-                      <td>200 $ </td>
-                      <td>21-10-2020</td>
-                    </tr>
-                <?php }?>
-                    <tr>
-                      <th scope="row"><?php echo @$i++;?></th>
-                      <td colspan="2">Larry the Bird</td>
-                      <td>@twitter</td>
-                      <td>Mark</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div class="mytable">
+                    <div class="row heading">
+                        <h2 style="text-align: center;padding: 30px 0px;color: #5c56a0;">Recent Bookings</h2>
+                    </div>
+                    <div class="row">    
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Email</th>
+                              <th scope="col">Phone</th>
+                              <th scope="col">Store</th>
+                              <th scope="col">Price</th>
+                              <th scope="col">Order Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php if(!empty(@$store_order)){ foreach($store_order as $key=>$value){?>
+                            <tr>
+                              <th scope="row"><?php echo $key+1;?></th>
+                              <td><?php echo @$value['user_name'];?></td>
+                              <td><?php echo @$value['email'];?></td>
+                              <td><?php echo @$value['phone'];?></td>
+                              <td><?php echo @$value['store_name'];?></td>
+                              <td><?php echo @$value['price'];?></td>
+                              <td><?php echo @$value['created_date'];?></td>
+                            </tr>
+                            <?php }}?>
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>    
           
         </div>
@@ -311,8 +313,8 @@ span.capital{
                 x: new Date(data[i].date),
                 y: data[i].units
             });
-        }
-        chart.render();
+    }
+    chart.render();
 
 }
 

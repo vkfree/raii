@@ -122,7 +122,7 @@ $config['ci_bootstrap'] = array(
 		),
 
 		'user' => array(
-			'name'		=> 'User',
+			'name'		=> 'User Management',
 			'url'		=> 'user',
 			'icon'		=> 'group',
 			'children'  => array(
@@ -132,7 +132,7 @@ $config['ci_bootstrap'] = array(
 		),
 
 		'survey' => array(
-			'name'		=> 'Survey',
+			'name'		=> 'Survey Mangement',
 			'url'		=> 'survey',
 			'icon'		=> 'poll',
 			'children'  => array(
@@ -140,6 +140,16 @@ $config['ci_bootstrap'] = array(
 				'Create'		=> 'survey/create',
 			)
 		),
+
+		'rewards' => array(
+        	'name'		=> 'Rewards Mangaement',
+        	'url'		=> 'rewards',
+        	'icon'		=> 'gamepad',
+        	'children'  => array(
+        		'List'			=> 'rewards/list',
+        	    'Create'		=> 'rewards/create',
+        	)
+        ),
 
 		'payments' => array(
 			'name'		=> 'Payments',
@@ -151,13 +161,14 @@ $config['ci_bootstrap'] = array(
 			)
 		),
 
-		'rewards' => array(
-        	'name'		=> 'Rewards',
-        	'url'		=> 'rewards',
-        	'icon'		=> 'gamepad',
+
+        'referal' => array(
+        	'name'		=> 'Referal Mangaement',
+        	'url'		=> 'banner',
+        	'icon'		=> 'note',
         	'children'  => array(
-        		'List'			=> 'rewards/list',
-        	    'Create'		=> 'rewards/create',
+        		'List'			=> 'banner',
+        	    'Create'		=> 'banner/create',
         	)
         ),
         
@@ -174,16 +185,7 @@ $config['ci_bootstrap'] = array(
         	)
         ),
 
-		// 'banner' => array(
-  //       	'name'		=> 'Banner',
-  //       	'url'		=> 'banner',
-  //       	'icon'		=> 'add_a_photo',
-  //       	'children'  => array(
-  //       		'List'			=> 'banner',
-  //       	    'Create'		=> 'banner/create',
-  //       	)
-  //       ),
-        
+		
 		// 'pages' => array(
   //       	'name'		=> 'Pages',
   //       	'url'		=> 'pages',
@@ -387,7 +389,7 @@ $config['ci_bootstrap'] = array(
 	'useful_links' => array(
 		array(
 			'auth'		=> array('webmaster', 'admin', 'manager', 'staff'),
-			'name'		=> 'Frontend Website',
+			'name'		=> 'Android app store link',
 			'url'		=> '',
 			'target'	=> '_blank',
 			'color'		=> 'text-aqua'

@@ -32,8 +32,7 @@ class User extends Admin_Controller {
 	public function create()
 	{
 		$form = $this->form_builder->create_form();
-
-		if ($form->validate())
+		if($this->input->post('username'))
 		{
 			// passed validation
 			$username = $this->input->post('username');

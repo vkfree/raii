@@ -52,6 +52,28 @@ class Home extends Admin_Controller {
 
 							$response[$qkey]['options'][3]['key'] = 'd';
 							$response[$qkey]['options'][3]['value'] = $oovalue['d'];
+
+							// if($oovalue['answer']==1)
+							// 	{
+							// 		$response[$qkey]['answer']['key'] = 'a';
+							// 		$response[$qkey]['answer']['value'] = $oovalue['a'];
+							// 	}
+							// else if($oovalue['answer']==2)
+							// 	{
+							// 		$response[$qkey]['answer']['key'] = 'b';
+							// 		$response[$qkey]['answer']['value'] = $oovalue['b'];
+							// 	}	
+							// else if($oovalue['answer']==3)
+							// 	{
+							// 		$response[$qkey]['answer']['key'] = 'c';
+							// 		$response[$qkey]['answer']['value'] = $oovalue['c'];
+							// 	}	
+							// else if($oovalue['answer']==4)
+							// 	{
+							// 		$response[$qkey]['answer']['key'] = 'd';
+							// 		$response[$qkey]['answer']['value'] = $oovalue['d'];
+							// 	}			
+							
 						}
 			 	}
 
