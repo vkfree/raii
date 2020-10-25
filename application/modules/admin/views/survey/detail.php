@@ -122,6 +122,17 @@ $color2: #3197EE;
                 </div>
              </div>
 
+             <div class="row">  
+                <div class="col-sm-6">
+                   <div class="form-group row">
+                      <label for="product_name" class="col-sm-2 col-form-label">Time<i class="text-danger">*</i></label>
+                      <div class="col-sm-10">
+                        <input type="time" name="survey_time" class="form-control" value="<?php echo @$survey_data[0]['survey_time'];?>">
+                      </div>
+                   </div>
+                </div>
+             </div>
+
   			    <div class="row">
 				      <div class="col-sm-6">
 	              <div class="form-group row">
@@ -159,12 +170,12 @@ $color2: #3197EE;
       <div class="panel lobidrag" id="create-question-div"  style="display: none;">
          <form action="#" data-ha-url="<?php echo base_url('en/admin/survey/store_question');?>" class="form-vertical" method="post" id="create-survey-question" name="create-survey-question" enctype="multipart/form-data"  accept-charset="utf-8">
             <input type="hidden" id="survey_id" name="survey_id" value="<?php echo @$survey_data[0]['survey_id'];?>">
-            <input type="hidden" name="qc1" id="qc1" value="<?php echo count(@$survey_data[0]['survey']);?>">
+            <input type="hidden" name="qc1" id="qc1" value="<?php if(!empty(@$survey_data[0]['survey'])){echo count(@$survey_data[0]['survey']);}else{echo "0";}?>">
             <div class="panel-body">
               <div class="row">
                 <div class="col-sm-12">
                    <div class="form-group row">
-                      <label for="product_name" class="col-sm-1 col-form-label"><span id="qc"> <?php echo count($survey_data[0]['survey'])+1;?> </span> Question<i class="text-danger">*</i></label>
+                      <label for="product_name" class="col-sm-1 col-form-label"><span id="qc"> <?php if(!empty(@$survey_data[0]['survey'])){ echo count(@$survey_data[0]['survey'])+1;}else{ echo "1";} ?> </span> Question <i class="text-danger">*</i></label>
                       <div class="col-sm-11">
                           <textarea class="form-control space" tabindex="1" placeholder="Please enter Question " name="question" type="text" id="question" rows="4" required=""></textarea>
                       </div>
@@ -271,7 +282,7 @@ $color2: #3197EE;
 
   <div id="listing" style="display: none;">
       <input type="button" class="btn btn-large btn-warning addquestion" value="Add more question"  onclick="SurveyAdd()">
-      <input type="hidden" id="qcountss"  value="<?php echo count($survey_data[0]['survey']);?>">
+      <input type="hidden" id="qcountss"  value="<?php if(!empty($survey_data[0]['survey'])){ echo count($survey_data[0]['survey']);}else{echo "0";}?>">
       <table class="table table-bordered table-striped table-hover dataTable js-exportable">
       <thead>
       <tr>
@@ -291,8 +302,8 @@ $color2: #3197EE;
 
       <tbody id="qrow">
       <?php
-      if(!empty($survey_data[0]['survey']))
-      foreach($survey_data[0]['survey'] as $key => $row)
+      if(!empty(@$survey_data[0]['survey']))
+      foreach(@$survey_data[0]['survey'] as $key => $row)
       {
 
       ?>

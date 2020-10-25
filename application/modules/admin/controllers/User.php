@@ -17,10 +17,10 @@ class User extends Admin_Controller {
 			foreach ($udata as $key => $avalue) 
 		    	{
 		    		$id = $avalue['id'];
-		    		$orders = $this->custom_model->my_where('order_master','*',array('user_id'=>$avalue['id']));
-		    		@$last_order = $this->custom_model->my_where("order_master","order_datetime,user_id,order_master_id",array('user_id'=>$avalue['id']),array(),"order_master_id","DESC");
+		    		$orders = $this->custom_model->my_where('store_order','*',array('user_id'=>$avalue['id']));
+		    		@$last_order = $this->custom_model->my_where("store_order","*",array('user_id'=>$avalue['id']),array(),"id","DESC");
 			    	$udata[$key]['orders_count']= count($orders);
-			    	$udata[$key]['last_order']= @$last_order[0]['order_datetime'];
+			    	$udata[$key]['last_order']= @$last_order[0]['created_date'];
 		    		
 		    	}
 			$this->mViewData['udata'] = $udata;
@@ -155,7 +155,7 @@ class User extends Admin_Controller {
 	    	}
     	foreach ($data as $key => $avalue) 
 	    	{
-	    		$orders = $this->custom_model->my_where('order_master','*',array('user_id'=>$avalue['id']));
+	    		$orders = $this->custom_model->my_where('store_order','*',array('user_id'=>$avalue['id']));
 	    		if(empty($orders))
 			    	{
 			    		echo "No Orders Yet";
@@ -164,19 +164,17 @@ class User extends Admin_Controller {
 			    	}
 	    		foreach ($orders as $key => $value) 
 		    		{
-			    		$export_data[$key]['Order Id']= $value['display_order_id'];
-			    		$export_data[$key]['Email']= $avalue['email'];
-			    		$export_data[$key]['Shipping Charge']= $value['shipping_charge'];
-			    		$export_data[$key]['Net Total']= $value['net_total'];
-			    		$export_data[$key]['Tax']= $value['tax'];
-			    		$export_data[$key]['Payement Mode']= $value['payment_mode'];
-			    		$export_data[$key]['Order Status']= $value['order_status'];
-			    		$export_data[$key]['Order Date']= $value['order_datetime'];
+		    			$store_data = $this->custom_model->my_where('store','*',array('id'=>$value['store_id']));
+
+			    		$export_data[$key]['Store Name']= @$store_data[0]['name'];
+			    		$export_data[$key]['Price']= @$store_data[0]['price'];
+			    		$export_data[$key]['Sale Price']= $value['price'];
+			    		$export_data[$key]['Order Date']= $value['created_date'];
 		    		}
 	    		
 	    	}
 
-	    $filename = "UserOrders" . date('Ymd') . ".xlsx";
+	    $filename = "StoreOrders".date('Ymd').time().".xlsx";
 		header("Content-Disposition: attachment; filename=\"$filename\"");
 	    header("Content-Type: text/xlsx");
 		$out = fopen("php://output", 'w');

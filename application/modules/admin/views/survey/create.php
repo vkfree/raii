@@ -110,6 +110,17 @@ $color2: #3197EE;
                 </div>
               </div>
               <div class="row">  
+                <div class="col-sm-6">
+                   <div class="form-group row">
+                      <label for="product_name" class="col-sm-2 col-form-label">Time<i class="text-danger">*</i></label>
+                      <div class="col-sm-10">
+                        <input type="time" name="survey_time" class="form-control" value="00:30">
+                      </div>
+                   </div>
+                </div>
+             </div>
+
+              <div class="row">  
   			        <div class="col-sm-6">
                    <div class="form-group row">
                       <label for="product_name" class="col-sm-2 col-form-label">Rewards<i class="text-danger">*</i></label>
@@ -119,6 +130,8 @@ $color2: #3197EE;
                    </div>
                 </div>
              </div>
+
+
 
   			    <div class="row">
 				      <div class="col-sm-6">
@@ -137,6 +150,8 @@ $color2: #3197EE;
 	              </div> 
 	            </div>       	
   			    </div>
+
+            
 
       			<div class="row">
       		    <div class="col-sm-6">

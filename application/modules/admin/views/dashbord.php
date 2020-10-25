@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" style="padding: 30px 10px;border: 1px solid #c1c1c1;">
                 <div class="col-md-8">
                     <div id="chartContainer" style="height: 300px; width: 100%;"></div>
                 </div>    
@@ -56,13 +56,13 @@
                 </div>    
             </div>
 
-            <div class="row" style="margin: 100px 10px;">
+            <div class="row" style="border: 1px solid #c1c1c1;padding: 10px 20px;margin: 30px 0px;">
                 <div class="mytable">
                     <div class="row heading">
-                        <h2 style="text-align: center;padding: 30px 0px;color: #5c56a0;">Recent Bookings</h2>
+                        <h2 style="text-align: center;padding: 10px 0px;font-size: 25px;color: #5b56a0;font-weight: normal;">Recent Store Order</h2>
                     </div>
                     <div class="row">    
-                        <table class="table">
+                        <table class="table table-bordered table-hover">
                           <thead>
                             <tr>
                               <th scope="col">#</th>
@@ -84,6 +84,106 @@
                               <td><?php echo @$value['store_name'];?></td>
                               <td><?php echo @$value['price'];?></td>
                               <td><?php echo @$value['created_date'];?></td>
+                            </tr>
+                            <?php }}?>
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>    
+
+
+            <div class="row" style="border: 1px solid #c1c1c1;padding: 10px 20px;margin: 30px 0px;">
+                <div class="mytable">
+                    <div class="row heading">
+                        <h2 style="text-align: center;padding: 10px 0px;font-size: 25px;color: #5b56a0;font-weight: normal;">Recently created stores</h2>
+                    </div>
+                    <div class="row">    
+                        <table class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Price</th>
+                              <th scope="col">Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php if(!empty(@$rewards)){ foreach($rewards as $key=>$value){?>
+                            <tr>
+                              <th scope="row"><?php echo $key+1;?></th>
+                              <td><?php echo @$value['name'];?></td>
+                              <td><?php echo @$value['price'];?></td>
+                              <td><?php echo @$value['status'];?></td>
+                            </tr>
+                            <?php }}?>
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>    
+
+            <div class="row" style="border: 1px solid #c1c1c1;padding: 10px 20px;margin: 30px 0px;">
+                <div class="mytable">
+                    <div class="row heading">
+                        <h2 style="text-align: center;padding: 10px 0px;font-size: 25px;color: #5b56a0;font-weight: normal;">Recently created Survey</h2>
+                    </div>
+                    <div class="row">    
+                        <table class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Survey ID</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Rewards</th>
+                              <th scope="col">Questions count</th>
+                              <th scope="col">Time</th>
+                              <th scope="col">Type</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php if(!empty(@$survey)){ foreach($survey as $key=>$value){?>
+                            <tr>
+                              <th scope="row"><?php echo $key+1;?></th>
+                              <td><?php echo @$value['survey_id'];?></td>
+                              <td><?php echo @$value['survey_name'];?></td>
+                              <td><?php echo @$value['rewards'];?></td>
+                              <td><?php echo @$value['question_count'];?></td>
+                              <td><?php echo @$value['time'];?></td>
+                              <td><?php echo @$value['type'];?></td>
+
+                            </tr>
+                            <?php }}?>
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>  
+
+            <div class="row" style="border: 1px solid #c1c1c1;padding: 10px 20px;margin: 30px 0px;">
+                <div class="mytable">
+                    <div class="row heading">
+                        <h2 style="text-align: center;padding: 10px 0px;font-size: 25px;color: #5b56a0;font-weight: normal;">Recently Registered Users</h2>
+                    </div>
+                    <div class="row">    
+                        <table class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Email</th>
+                              <th scope="col">Phone</th>
+                              <th scope="col">Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php if(!empty(@$users)){ foreach($users as $key=>$value){?>
+                            <tr>
+                              <th scope="row"><?php echo $key+1;?></th>
+                              <td><?php echo @$value['first_name']." ".@$value['last_name'];?></td>
+                              <td><?php echo @$value['email'];?></td>
+                              <td><?php echo @$value['phone'];?></td>
+                              <td><?php echo date("Y-m-d H:i:s",@$value['created_on']);?></td>
                             </tr>
                             <?php }}?>
                           </tbody>

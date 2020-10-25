@@ -156,19 +156,17 @@ $config['ci_bootstrap'] = array(
 			'url'		=> 'payments',
 			'icon'		=> 'payment',
 			'children'  => array(
-				'List'			=> 'payments/list',
-				'Create'		=> 'payments/create',
+				'List'			=> 'payments/list'
 			)
 		),
 
 
         'referal' => array(
         	'name'		=> 'Referal Mangaement',
-        	'url'		=> 'banner',
+        	'url'		=> 'referal',
         	'icon'		=> 'note',
         	'children'  => array(
-        		'List'			=> 'banner',
-        	    'Create'		=> 'banner/create',
+        		'List'			=> 'referal'
         	)
         ),
         
@@ -178,10 +176,9 @@ $config['ci_bootstrap'] = array(
         	'url'		=> 'setting',
         	'icon'		=> 'brightness_7',
         	'children'  => array(
-        		'Refreal'			=> 'rewards/list',
-        	    'Notification'		=> 'rewards/create',
-        	    'Profile'		=> 'rewards/create',
-        	    'History'		=> 'rewards/create',
+        	    'Notification'		=> 'setting/notification',
+        	    'Profile'		=> 'setting/profile',
+        	    'History'		=> 'setting/history',
         	)
         ),
 

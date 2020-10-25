@@ -10,10 +10,6 @@
 <script src='<?php echo base_url(); ?>assets/grocery_crud/themes/datatables/jquery-datatable/extensions/pdfmake.min.js'></script>
 <script src='<?php echo base_url(); ?>assets/grocery_crud/themes/datatables/jquery-datatable/extensions/buttons.html5.min.js'></script>
 <script src='<?php echo base_url(); ?>assets/grocery_crud/themes/datatables/jquery-datatable/extensions/buttons.print.min.js'></script>
-<div class="form-group">
-
-<a style="width:150px;border-radius:5px;padding: 5px 0px;background-color:#e75982 !important;font-weight: bold;" href="<?php echo base_url();?>admin/rewards/export_store" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button"  style="font-weight: bold;">Export Store Data</a>
-</div>
 
 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
 <thead>

@@ -37,7 +37,8 @@ class Survey extends Admin_Controller {
 					$update_data = array(
 									'survey_name'=>@$post_data['survey_name'],
 									'rewards'=>@$post_data['rewards'],
-									'type'=>@$post_data['type']
+									'type'=>@$post_data['type'],
+									'survey_time'=>@$post_data['survey_time']
 							       );
 					$update_id = $this->custom_model->my_update($update_data,array('survey_id',@$post_data['id']),'survey');
 					if($update_id)
@@ -63,6 +64,7 @@ class Survey extends Admin_Controller {
 							'survey_name'=>@$post_data['survey_name'],
 							'rewards'=>@$post_data['rewards'],
 							'type'=>@$post_data['type'],
+							'survey_time'=>@$post_data['survey_time'],
 							'survey_id'=>$genrated_id
 						   );
 					$insert_id = $this->custom_model->my_insert($insert_data,'survey');
@@ -168,6 +170,8 @@ class Survey extends Admin_Controller {
 						}
 				}
 			$this->mViewData['survey_data'] = $survey_data;
+			// echo "<pre>";
+			// print_r($survey_data);die();
 			$this->render('survey/detail');		
 		}
 

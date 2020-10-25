@@ -17,15 +17,21 @@ class Dashbord extends Admin_Controller {
 		
 		$form = $this->form_builder->create_form('','','id="wizard_with_validation" class="wizard clearfix"');
 
-		$users = $this->custom_model->my_where('users','*',array(),array(),"","","","", array(), "",array(),false );
-		$rewards = $this->custom_model->my_where('store','*',array(),array(),"","","","", array(), "",array(),false );
-		$survey = $this->custom_model->my_where('survey','*',array(),array(),"","","","", array(), "",array(),false );
-		$orders = $this->custom_model->my_where('order_table','*',array(),array(),"","","","", array(), "",array(),false );
+		$users = $this->custom_model->my_where('users','*',array(),array(),"","DESC","id","", array(), "",array(),false );
+		$rewards = $this->custom_model->my_where('store','*',array(),array(),"","DESC","id","", array(), "",array(),false );
+		$survey = $this->custom_model->my_where('survey','*',array(),array(),"","DESC","id","", array(), "",array(),false );
+		$orders = $this->custom_model->my_where('order_table','*',array(),array(),"","DESC","id","", array(), "",array(),false );
 
 		$this->mViewData['user_count'] 	 = count($users);	
 		$this->mViewData['reward_count'] = count($rewards);	
 		$this->mViewData['store_count']  = count($survey);	
 		$this->mViewData['orders_count'] = count($orders);	
+
+
+		$this->mViewData['orders']  = array_slice($orders,0,10);	
+		$this->mViewData['users']   = array_slice($users,0,10);	
+		$this->mViewData['survey']  = array_slice($survey,0,10);	
+		$this->mViewData['rewards'] = array_slice($rewards,0,10);	
 
 		$store_order = $this->custom_model->my_where('store_order','*',array(),array(),"","","","", array(), "",array(),false );
 		if(!empty($store_order))
@@ -43,7 +49,9 @@ class Dashbord extends Admin_Controller {
 						$store_order[$key]['price']     	= @$store[0]['price'];
 					}				
 			}
-		$this->mViewData['store_order'] = $store_order;	
+		$this->mViewData['store_order'] = $store_order;
+
+		
 		$now = date('Y-m-d' ,strtotime('today'));
 		$month = date('Y-m' ,strtotime('today'));
 		$date = date('Y-m-d');
