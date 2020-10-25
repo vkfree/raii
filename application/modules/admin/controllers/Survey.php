@@ -27,6 +27,7 @@ class Survey extends Admin_Controller {
 
 
 
+
 	public function store()
 		{
 			$genrated_id = "RIL_".time().rand(10000,99999);
@@ -87,6 +88,18 @@ class Survey extends Admin_Controller {
 				}		
 			
 		}	
+
+	public function getQuestion($question_id)
+		{
+			$survey_questions= array();
+			$qid = en_de_crypt($question_id,'d');
+			$survey_questions =  $this->custom_model->my_where('survey_questions','*',array('id'=>$qid,'deleted_at'=>NULL));
+			@$survey_questions[0]['en_id'] =en_de_crypt(@$survey_questions[0]['id'],'e');
+			$return_data['status']="success";
+			$return_data['survey']= @$survey_questions[0];
+			$return_data['msg']="Survey created successfully";
+			echo json_encode($return_data);
+		}
 
 	public function questions($row)
 		{
@@ -150,6 +163,40 @@ class Survey extends Admin_Controller {
 					die();
 				}	
 		}
+
+
+	public function store_question_edit()
+		{
+			$post_data = $this->input->post();
+			$id = en_de_crypt(@$post_data['en_id'],'d');
+			$insert_data = array(
+							'question'=>@$post_data['question'],
+							'a'=>@$post_data['option_1'],
+							'b'=>@$post_data['option_2'],
+							'c'=>@$post_data['option_3'],
+							'd'=>@$post_data['option_4'],
+							'answer'=>@$post_data['answer'],
+							'time'=>@$post_data['time']
+								);
+			$insert_id = $this->custom_model->my_update($insert_data,array('id'=>$id),'survey_questions');
+			if($insert_id)
+				{
+					$return_data['status']="success";
+					$return_data['id']=$insert_id;
+					$return_data['msg']="Survey question added successfully";
+					echo json_encode($return_data);
+					die();
+				}
+			else
+				{
+					$return_data['status']="error";
+					$return_data['id']=$insert_id;
+					$return_data['msg']="Survey question create failed";
+					echo json_encode($return_data);		
+					die();
+				}	
+
+		}	
 	
 	public function edit($survey_id)
 		{
