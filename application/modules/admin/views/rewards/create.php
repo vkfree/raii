@@ -1,6 +1,6 @@
 <style type="text/css">
 .form-group .form-control{
-	border: 1px solid #ededed;
+	border: 1px solid #b5b0b0 !important;
   	padding: 0px 10px;
 }
 .panel-body {
@@ -85,6 +85,10 @@ $color2: #3197EE;
   }
 }
 </style>
+<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
 <div class="row">
    <div class="col-sm-12">
       <div class="panel lobidrag" id="create-survey-div">
@@ -100,13 +104,32 @@ $color2: #3197EE;
                       </div>
                    </div>
                 </div>
-              </div>
-              <div class="row">  
+              
   			        <div class="col-sm-6">
                    <div class="form-group row">
                       <label for="product_name" class="col-sm-2 col-form-label">Price<i class="text-danger">*</i></label>
                       <div class="col-sm-10">
                           <textarea class="form-control space" tabindex="1" name="coupoun" type="text" id="coupoun" placeholder="Please enter coupoun value"  required="" autocomplete="off"><?php echo @$store_data[0]['price'];?></textarea>
+                      </div>
+                   </div>
+                </div>
+             </div>
+
+             <div class="row">  
+                <div class="col-sm-6">
+                   <div class="form-group row">
+                      <label for="product_name" class="col-sm-2 col-form-label">Start Date<i class="text-danger">*</i></label>
+                      <div class="col-sm-10">
+                          <input  class="form-control" type = "text" name="start_date" id = "datepicker-13" value="<?php echo @$store_data[0]['start_date'];?>" required>
+                      </div>
+                   </div>
+                </div>
+              
+                <div class="col-sm-6">
+                   <div class="form-group row">
+                      <label for="product_name" class="col-sm-2 col-form-label">End Date<i class="text-danger">*</i></label>
+                      <div class="col-sm-10">
+                          <input class="form-control" type = "text" name="end_date" id = "datepicker-23" value="<?php echo @$store_data[0]['start_date'];?>" required>
                       </div>
                    </div>
                 </div>
@@ -160,6 +183,21 @@ $color2: #3197EE;
    </div>
 </div>      	
 
+<script>
+   $(function() {
+      $( "#datepicker-13" ).datepicker({
+        appendText:"Select Start date",
+        dateFormat:"yy-mm-dd",
+      });
+      $( "#datepicker-13" ).datepicker("show");
+
+      $( "#datepicker-23" ).datepicker({
+        appendText:"Select Start date",
+        dateFormat:"yy-mm-dd",
+      });
+      $( "#datepicker-23" ).datepicker("show");
+   });
+</script>
 
 <script type="text/javascript">
   function showLoader(){

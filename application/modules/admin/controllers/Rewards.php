@@ -47,6 +47,8 @@ class Rewards extends Admin_Controller {
 													'name'=>@$post_data['name'],
 													'price'=>@$post_data['coupoun'],
 													'status'=>@$post_data['status'],
+													'start_date'=>@$post_data['start_date'],
+													'end_date'=>@$post_data['end_date'],
 													'image'=>@$file_name_old
 									       		);
 							$id = en_de_crypt(@$post_data['id'],'d');
@@ -72,6 +74,8 @@ class Rewards extends Admin_Controller {
 													'name'=>@$post_data['name'],
 													'price'=>@$post_data['coupoun'],
 													'image'=>@$file_name_old,
+													'start_date'=>@$post_data['start_date'],
+													'end_date'=>@$post_data['end_date'],
 													'status'=>@$post_data['status']
 								   				);
 							$insert_id = $this->custom_model->my_insert($insert_data,'store');
